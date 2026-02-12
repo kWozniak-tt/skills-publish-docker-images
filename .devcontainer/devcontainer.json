@@ -3,9 +3,9 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "moby": false
-    },
-    "ghcr.io/devcontainers-extra/features/actionlint:1": {}
+    }
   },
+  "postCreateCommand": "set -e; sudo apt-get update; sudo apt-get install -y --no-install-recommends ca-certificates curl tar; ACTIONLINT_VERSION=1.7.10; ARCH=$(uname -m); case \"$ARCH\" in x86_64) A=amd64 ;; aarch64|arm64) A=arm64 ;; *) echo \"Unsupported arch: $ARCH\"; exit 1 ;; esac; curl -fsSL \"https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_${A}.tar.gz\" -o /tmp/actionlint.tgz; sudo tar -xzf /tmp/actionlint.tgz -C /usr/local/bin actionlint; sudo chmod +x /usr/local/bin/actionlint; actionlint -version",
   "forwardPorts": [8080],
   "customizations": {
     "vscode": {
@@ -18,7 +18,6 @@
       "settings": {
         "[yaml]": {
           "editor.tabSize": 2,
-          "editor.defaultFormatter": "redhat.vscode-yaml",
           "editor.insertSpaces": true
         }
       }
